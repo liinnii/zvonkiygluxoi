@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Звонкие и глухие, твёрдые и мягкие согласные</title>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--icy:#AED5F5;--azure:#367ADF;--sky:#4FACE5;--french:#394988;--char:#353A4C;--pale:#EEF6FD;--ok:#2E9E6B;--bad:#D9534F;--pink:#F6B8CF;--pinkd:#C2467A;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:#fff;color:var(--char);font:400 18px/1.6 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Alegreya,Georgia,serif;margin:0;line-height:1.15}
+main{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+header{text-align:center;padding:30px 0 10px}
+h1{font-size:clamp(32px,7vw,54px);color:var(--french);font-weight:800}
+.sub{color:var(--azure);font-weight:600;margin-top:10px}
+section{margin-top:54px}
+h2{font-size:clamp(26px,5vw,38px);color:var(--french);display:flex;gap:12px;align-items:center;font-weight:800}
+h2 .star{color:var(--sky);width:.8em;height:.8em;flex:none}
+.lead{color:#59627a;margin:8px 0 22px}
+.row{display:flex;gap:10px;margin-bottom:10px}
+.tile{width:84px;flex:none;border-radius:18px;display:grid;place-items:center;font-size:34px}
+.bar{flex:1;border-radius:18px;padding:12px 20px}.bar h3{font-size:23px}.bar p{margin:2px 0 0;font-size:16px}
+.r1 .tile,.r1 .bar{background:var(--icy)}.r1 h3{color:var(--azure)}
+.r2 .tile,.r2 .bar{background:var(--azure);color:#fff}.r2 h3{color:#fff}
+.r3 .tile,.r3 .bar{background:var(--sky);color:#0f2236}.r3 h3{color:#0f2236}
+.r4 .tile,.r4 .bar{background:var(--french);color:#E6EEFA}.r4 h3{color:var(--icy)}
+.r5 .tile,.r5 .bar{background:var(--char);color:#E3E8F2}.r5 h3{color:var(--sky)}
+.card{background:var(--pale);border:2px solid var(--icy);border-radius:22px;padding:20px 22px;margin:14px 0}
+.card h3{font-size:24px;color:var(--french);margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.note{background:#fff;border-left:6px solid var(--sky);border-radius:0 14px 14px 0;padding:10px 16px;margin:12px 0}
+.trainer{background:#fff;border:2px solid var(--azure);border-radius:24px;padding:22px;text-align:center;margin:18px 0}
+.tag{color:var(--azure);font-weight:800;margin-bottom:6px}
+.big{font:800 clamp(38px,9vw,60px) Alegreya,serif;color:var(--french);letter-spacing:2px}
+.q{font:800 clamp(26px,6vw,38px) Alegreya,serif;color:var(--french);margin:6px 0}
+.q b{color:#fff;background:var(--azure);border-radius:8px;padding:0 8px}
+.btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+button{font:800 20px Nunito,sans-serif;border:0;border-radius:16px;padding:12px 22px;background:var(--azure);color:#fff;cursor:pointer;min-width:56px}
+button:hover{background:var(--french)}button.alt{background:var(--icy);color:var(--french)}button.alt.on{background:var(--french);color:#fff}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--french);outline-offset:2px}
+button:disabled{opacity:.5;cursor:default}
+.msg{min-height:30px;font-weight:800}.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
+/* throat */
+.throat{display:grid;place-items:center;height:170px}
+.face{font-size:84px;z-index:1;line-height:1}
+.rings i{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border:4px solid var(--sky);border-radius:50%;opacity:0}
+.throat.on .rings i{animation:ring 1.3s infinite}.throat.on .rings i:nth-child(2){animation-delay:.4s}.throat.on .rings i:nth-child(3){animation-delay:.8s}
+.throat.on .face{animation:shake .12s infinite}
+@keyframes ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(-2px)}50%{transform:translateX(2px)}}
+/* pairs */
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.pair{display:flex;gap:8px;background:#fff;border:2px solid var(--icy);border-radius:18px;padding:8px}
+.say{flex:1;background:var(--azure);color:#fff;font:800 22px Alegreya,serif;padding:10px 4px;border-radius:14px;line-height:1.2}
+.say small{display:block;font:600 13px Nunito,sans-serif;opacity:.9}.say .e{display:block;font-size:34px}
+.say.g{background:#8A93A8}.say:hover{filter:brightness(.92)}.say.buzz{animation:shake .08s 8}
+/* memes */
+.meme{background:#1d2030;border-radius:18px;text-align:center;padding:14px 12px;color:#fff;font:900 clamp(18px,4.6vw,25px)/1.15 Impact,'Arial Black',sans-serif;text-transform:uppercase;letter-spacing:1px;text-shadow:2px 2px 0 #000}
+.meme .e{font-size:62px;margin:6px 0;line-height:1.1}.meme i{font-style:normal;color:#FFD84D}
+/* morph */
+.lt{display:inline-block;border-radius:10px;padding:0 6px;background:var(--icy);color:var(--azure);transition:.3s}
+.lt.sl{background:#8A93A8;color:#fff;transform:rotate(-8deg)}
+.zz{display:inline-block;font-size:30px;animation:fl 1.4s infinite}@keyframes fl{50%{transform:translateY(-8px)}}
+/* switch */
+.syl{display:flex;justify-content:center;align-items:center;gap:6px;min-height:130px}
+.ct,.vt{font:800 84px/1.1 Alegreya,serif;border-radius:20px;padding:0 22px;transition:.35s}
+.ct.hard{background:#6B7690;color:#fff;box-shadow:0 8px 0 #444C63;border-radius:10px}
+.ct.soft{background:var(--pink);color:var(--pinkd);border-radius:50px 50px 40px 40px;box-shadow:0 0 28px 8px #fbe0ea;transform:scale(1.08)}
+.vt{color:var(--french)}
+.vb{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0}.vb button{padding:8px 14px;font:800 22px Alegreya,serif}
+.vb button.s{background:var(--pink);color:var(--pinkd)}.vb button.s.on{background:var(--pinkd);color:#fff}.vb button.h.on{background:var(--french);color:#fff}
+.vb button.h{background:#DCE1EC;color:var(--char)}
+.hs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hs div{border-radius:18px;padding:14px;text-align:center}.hs .h{background:#DCE1EC}.hs .s{background:#FDE7F0}
+.hs .big{font-size:34px;letter-spacing:1px}
+.chip{display:block;background:#fff;border:2px solid var(--icy);border-radius:14px;padding:8px 14px;margin:6px 0}
+.chip b{font:800 24px Alegreya,serif;color:var(--azure);margin-right:6px}
+details{background:var(--pale);border:2px solid var(--icy);border-radius:20px;padding:6px 20px;margin:14px 0}
+summary{cursor:pointer;font:800 22px Alegreya,serif;color:var(--french);padding:10px 0}
+.check label{display:flex;gap:12px;padding:6px 0;cursor:pointer}.check input{width:22px;height:22px;accent-color:var(--azure);flex:none;margin-top:4px}
+ul.clean{list-style:none;padding:0;margin:8px 0}ul.clean li{padding:5px 0 5px 32px;position:relative}ul.clean li::before{content:"✦";position:absolute;left:4px;color:var(--sky)}
+footer{margin-top:50px;border-radius:18px;background:var(--pale);color:var(--azure);text-align:center;padding:14px;font-weight:700}
+@media(max-width:520px){.tile{width:60px;font-size:26px}.ct,.vt{font-size:64px;padding:0 14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.ic{width:1.1em;height:1.1em;vertical-align:-.18em;flex:none}
+.tile .ic{width:44px;height:44px}.say .e .ic{width:44px;height:44px}.meme .e .ic{width:72px;height:72px;margin:0 4px}
+.tsvg{width:min(100%,320px);height:auto}
+.rg circle{fill:none;stroke:#4FACE5;stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center}
+.wv,.air{opacity:0;transition:.2s}
+.throat.on .rg circle{animation:ring 1.3s infinite}.throat.on .rg circle:nth-child(2){animation-delay:.4s}.throat.on .rg circle:nth-child(3){animation-delay:.8s}
+.throat.on .wv{opacity:1}.throat.off .air{opacity:1}.throat.on .hd{animation:shake .12s infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+.cells{display:flex;justify-content:center;align-items:flex-end;gap:12px;font-size:34px;text-align:center;margin:10px 0}.cells div{display:flex;flex-direction:column;align-items:center}
+.L{font:800 46px Alegreya,serif;color:var(--french);background:#fff;border:2px solid var(--icy);border-radius:12px;padding:0 14px}.cells .low .L{background:#8A93A8;color:#fff;border-color:#8A93A8}
+.twins{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}.tw{display:flex;gap:8px;align-items:center;font:800 30px Alegreya,serif;background:#fff;border:2px solid var(--icy);border-radius:16px;padding:6px 16px}.tw .h{color:#444C63}.tw .s{color:var(--pinkd)}
+.lt.sf{background:var(--pink);color:var(--pinkd);transform:scale(1.1)}
+.flow{text-align:center}.flow .box{background:#fff;border:2px solid var(--azure);border-radius:16px;padding:8px 14px;display:inline-block;font-weight:700}.flow .dn{font-size:26px;line-height:1.2}.flow .two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}.flow .two div{border-radius:14px;padding:10px;font-weight:700}
+.flow .h{background:#DCE1EC}.flow .s{background:#FDE7F0}
+.tbl{width:100%;border-collapse:separate;border-spacing:6px;margin:14px 0;table-layout:fixed}
+.tbl th,.tbl td{border-radius:16px;padding:10px 8px;text-align:center;vertical-align:middle}
+.tbl thead th{font:800 20px Alegreya,serif;color:#fff}.tbl .tv{background:var(--azure)}.tbl .tg{background:#8A93A8}
+.tbl tbody th{width:84px;background:var(--french);color:#fff;font:800 18px Alegreya,serif}
+.tbl td.v{background:#E3EEFB}.tbl td.g{background:#E8EAEF}
+.tbl .c{display:inline-block;min-width:36px;margin:3px;padding:2px 6px;border-radius:10px;background:#fff;border:2px solid var(--icy);font:800 26px Alegreya,serif;color:var(--french)}
+.tbl td.g .c{border-color:#BCC2D0;color:#444C63}
+.tbl small{display:block;font:600 13px Nunito,sans-serif;color:#59627a;margin-top:4px}
+.strip-wrap{overflow-x:auto;border-radius:16px;border:2px solid #E8C46A;background:#FBF1D3}
+.strip{display:grid;grid-template-columns:repeat(21,1fr);min-width:780px;gap:0}
+.strip .hd{background:#FBF1D3;color:#B3261E;font:800 17px Alegreya,serif;text-align:center;padding:8px 4px;border-bottom:2px solid #E8C46A}.strip .hd.sm{font-size:10px;line-height:1.1;color:#8a6d2a}
+.strip .nt{font-size:12px;line-height:1.25;padding:6px 8px;text-align:center;color:#5a4a1a}
+.strip .lb{font:800 13px Nunito,sans-serif;text-align:center;padding:6px 2px;color:#5a4a1a;border-top:2px solid #E8C46A}
+.c{position:relative;display:grid;place-items:center;height:70px;font:800 44px/1 Alegreya,serif;font-style:normal;color:#FFE23D;-webkit-text-stroke:1.5px #353A4C;paint-order:stroke fill;border:1px solid #fff}
+.c.vw{background:#D8232A;color:#EEF0F6;-webkit-text-stroke:1px #8a1519}
+.c.vw.two::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1.5px),#fff calc(50% - 1.5px),#fff calc(50% + 1.5px),transparent calc(50% + 1.5px))}
+.c.d,.sw.d{background:linear-gradient(135deg,#2F6FDB 50%,#34A853 50%)}.c.h,.sw.h{background:#2F6FDB}.c.s,.sw.s{background:#34A853}
+.c.e{background:#fff;-webkit-text-stroke:0}.c.ico{font-size:30px}.c.x{background:#FBF1D3;color:#8A93A8;-webkit-text-stroke:0}
+.leg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;background:#F08A24;border-radius:16px;padding:12px;color:#fff;font-size:15px;line-height:1.35}
+.leg div{display:flex;gap:10px;align-items:flex-start}.sw{flex:none;width:34px;height:34px;border:2px solid #fff;border-radius:6px;position:relative;background:#D8232A}
+.sw.two::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1.5px),#fff calc(50% - 1.5px),#fff calc(50% + 1.5px),transparent calc(50% + 1.5px))}
+</style>
+</head>
+<body>
+<main>
+<svg width="0" height="0" style="position:absolute"><symbol id="s" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c.6 6.6 4.9 11.4 12 12-7.1.6-11.4 5.4-12 12-.6-6.6-4.9-11.4-12-12C7.100 11.400 11.400 6.600 12 0z"/></symbol></svg>
+
+<header>
+  <h1>Звонкие и глухие, твёрдые и мягкие согласные</h1>
+  <div class="sub">Урок на 60 минут: с мемами, анимацией и тренажёрами</div>
+</header>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>План урока</h2>
+  <p class="lead">Нажимайте на всё подряд: тут почти каждая картинка живая.</p>
+  <div class="row r1"><div class="tile">🖐️</div><div class="bar"><h3>0–5 мин. Разминка</h3><p>Ладошка на горле: кто «дрожит», а кто молчит</p></div></div>
+  <div class="row r2"><div class="tile">🔔</div><div class="bar"><h3>5–25 мин. Звонкие и глухие</h3><p>Пары, мемы, «засыпающие» буквы на конце слова</p></div></div>
+  <div class="row r3"><div class="tile">☁️</div><div class="bar"><h3>25–45 мин. Твёрдые и мягкие</h3><p>Переключатель мягкости, Ж-Ш-Ц и Ч-Щ, мягкий знак</p></div></div>
+  <div class="row r4"><div class="tile">🎮</div><div class="bar"><h3>45–55 мин. Игры</h3><p>Тренажёры и разбор слова</p></div></div>
+  <div class="row r5"><div class="tile">🏆</div><div class="bar"><h3>55–60 мин. Итоги</h3><p>Викторина, шпаргалка, самопроверка</p></div></div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Разминка: ладошка на горле</h2>
+  <p class="lead">Приложите ладонь к горлу и произнесите долгое «ббб», а потом «ппп».</p>
+  <div class="trainer">
+    <div class="throat" id="th"><div class="rings"><i></i><i></i><i></i></div><div class="face">🗣️</div></div>
+    <div class="btns"><button id="tb">Скажи «Б»</button><button class="alt" id="tp">Скажи «П»</button></div>
+    <div class="msg" id="tm">Выберите звук</div>
+  </div>
+  <div class="note"><b>Звонкие</b> — голос работает, горло дрожит 🔔. <b>Глухие</b> — только шёпот и воздух 🔕.</div>
+  <div class="meme"><div>Б — это П,</div><div class="e">🔔➡️🔕</div><div>которое <i>включило голос</i></div></div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Звонкие и глухие</h2>
+  <p class="lead">Нажмите на слово: у звонкого горло «задрожит»</p>
+  <div class="pairs">
+    <div class="pair"><button class="say v"><span class="e">🛢️</span>бочка<small>🔔 Б</small></button><button class="say g v0"><span class="e">🌱</span>почка<small>🔕 П</small></button></div>
+    <div class="pair"><button class="say v"><span class="e">🏠</span>дом<small>🔔 Д</small></button><button class="say g v0"><span class="e">📚</span>том<small>🔕 Т</small></button></div>
+    <div class="pair"><button class="say v"><span class="e">🐐</span>коза<small>🔔 З</small></button><button class="say g v0"><span class="e">💇</span>коса<small>🔕 С</small></button></div>
+    <div class="pair"><button class="say v"><span class="e">⚽</span>гол<small>🔔 Г</small></button><button class="say g v0"><span class="e">🪵</span>кол<small>🔕 К</small></button></div>
+    <div class="pair"><button class="say v"><span class="e">🔥</span>жар<small>🔔 Ж</small></button><button class="say g v0"><span class="e">🎈</span>шар<small>🔕 Ш</small></button></div>
+    <div class="pair"><button class="say v"><span class="e">🏺</span>ваза<small>🔔 В</small></button><button class="say g v0"><span class="e">🌓</span>фаза<small>🔕 Ф</small></button></div>
+  </div>
+  <div class="note">Одно изменение звука — и другое слово! Пары: <b>б–п, в–ф, г–к, д–т, ж–ш, з–с</b>.</div>
+  <div class="strip-wrap"><div class="strip">
+<b class="hd" style="grid-column:span 5">Буквы гласных звуков</b><b class="hd" style="grid-column:span 15">Буквы согласных звуков</b><b class="hd sm">Буквы не обозначают звуки</b>
+<span class="nt" style="grid-column:span 5">Гласные 1-го ряда делают согласный <b>твёрдым</b></span><span class="nt" style="grid-column:span 15">В первом ряду — <b>звонкие</b> согласные 🔔</span><span class="nt"></span>
+<i class="c vw">а</i><i class="c vw">о</i><i class="c vw">у</i><i class="c vw">ы</i><i class="c vw">э</i><i class="c s">й</i><i class="c d">н</i><i class="c d">м</i><i class="c d">л</i><i class="c d">р</i><i class="c d">б</i><i class="c d">в</i><i class="c d">г</i><i class="c d">д</i><i class="c d">з</i><i class="c h">ж</i><i class="c e ico">🔔</i><i class="c e"></i><i class="c e"></i><i class="c e"></i><i class="c x">ъ</i>
+<i class="c vw two">я</i><i class="c vw two">ё</i><i class="c vw two">ю</i><i class="c vw">и</i><i class="c vw two">е</i><i class="c e"></i><i class="c e"></i><i class="c e"></i><i class="c e"></i><i class="c e ico">🎧</i><i class="c d">п</i><i class="c d">ф</i><i class="c d">к</i><i class="c d">т</i><i class="c d">с</i><i class="c h">ш</i><i class="c d">х</i><i class="c h">ц</i><i class="c s">ч</i><i class="c s">щ</i><i class="c x">ь</i>
+<span class="nt" style="grid-column:span 5">Гласные 2-го ряда делают согласный <b>мягким</b></span><b class="lb" style="grid-column:span 5">Непарные звонкие</b><b class="lb" style="grid-column:span 6">Парные звонкие / глухие</b><b class="lb" style="grid-column:span 4">Непарные глухие</b><span class="nt"></span>
+<span class="nt" style="grid-column:6/span 15">Во втором ряду — <b>глухие</b> согласные 🎧</span>
+</div></div>
+<p class="lead" style="margin:4px 0 10px">Таблицу можно листать вбок ↔. Буквы стоят парами: Б над П, В над Ф, Г над К, Д над Т, З над С, Ж над Ш.</p>
+<div class="leg">
+<div><i class="sw two"></i>Гласные Я Ё Ю Е дают <b>два звука</b>, если стоят в начале слова (ель), после гласной (пояс), после Ъ и Ь (подъём, вьюга)</div>
+<div><i class="sw d"></i>Буква даёт <b>твёрдый или мягкий</b> звук: зависит от следующей гласной</div>
+<div><i class="sw h"></i><b>Всегда твёрдые:</b> Ж, Ш, Ц</div>
+<div><i class="sw s"></i><b>Всегда мягкие:</b> Й, Ч, Щ</div></div>
+  <div class="card"><h3>Пара — это близнецы 👯</h3>
+    <div class="cells"><div><span class="L">Б</span>🎤</div><div style="font-size:26px">=</div><div class="low"><span class="L">П</span>🔇</div></div>
+    <p>Рот, губы и язык делают <b>одно и то же</b> (👄). Разница только в голосе: у Б микрофон включён 🎤, у П выключен 🔇. Поэтому слова «бочка» и «почка» почти одинаковы, но это разные слова.</p></div>
+  <div class="grid">
+    <div class="card"><h3>Без пары</h3><p><b>Звонкие:</b> Й Л М Н Р — «поют» всегда.<br><b>Глухие:</b> Х Ц Ч Щ — всегда шепчут.</p></div>
+    <div class="card"><h3>Запоминалка глухих</h3><p>«<b>С</b>тёпка, хочешь <b>щ</b>ей? — <b>Ф</b>и!» → С Т Ф К П Ш Х Ц Ч Щ.</p></div>
+  </div>
+
+  <h3 style="margin:28px 0 8px;color:var(--french);font-size:28px">Ловушка: буквы засыпают 😴</h3>
+  <p class="lead">На конце слова и перед глухим звонкий согласный «засыпает» и звучит как парный глухой. Пишем одно, слышим другое!</p>
+  <div class="meme"><div>зуб пишем с Б</div><div class="e">🦷😴</div><div>а слышим <i>«зуп»</i></div></div>
+  <div class="trainer">
+    <div class="tag">Нажмите «Дальше» и посмотрите, что происходит с буквой</div>
+    <div class="btns" id="ob"></div>
+    <div class="big" id="ow"></div><div class="msg ok" id="om"></div>
+    <div class="btns"><button id="on">Дальше ▶</button></div>
+  </div>
+  <div class="card"><h3>Почему «зуб» слышится как «зуп»? Голос — как батарейка 🔋</h3>
+    <div class="cells"><div><span class="L">З</span>🔋</div><div><span class="L">У</span>🔋</div><div class="low"><span class="L">Б</span>🪫</div></div>
+    <p>К концу слова батарейка садится: звонкий Б «выключает голос» и звучит как П. А когда после Б идёт гласный (зубы), заряд ещё есть, и Б слышно.</p></div>
+  <div class="card"><h3>Глухой сосед «заражает» 🤧</h3>
+    <div class="cells"><div><span class="L">з</span>🔔</div><div style="font-size:30px">👈</div><div class="low"><span class="L">к</span>🔕</div></div>
+    <p>В слове <b>сказка</b> звонкая З стоит рядом с глухой К и «заражается» шёпотом: слышим [ска<b>с</b>ка]. Так же: лодка → [ло<b>т</b>ка].</p></div>
+  <div class="note"><b>Лайфхак:</b> измени слово так, чтобы после согласного встал гласный. зуб → зубы, сказка → сказочка.</div>
+  <div class="trainer" id="q1"></div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Твёрдые и мягкие</h2>
+  <p class="lead">Мягкий согласный произносится «с улыбкой»: язык тянется к нёбу. Это меняет слово!</p>
+  <div class="pairs">
+    <div class="pair"><button class="say"><span class="e">🧅</span>лук<small>твёрдый Л 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">🕳️</span>люк<small>мягкий Л’ ☁️</small></button></div>
+    <div class="pair"><button class="say"><span class="e">🧼</span>мыл<small>твёрдый М 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">🥰</span>мил<small>мягкий М’ ☁️</small></button></div>
+    <div class="pair"><button class="say"><span class="e">😀</span>рад<small>твёрдый Р 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">🪑</span>ряд<small>мягкий Р’ ☁️</small></button></div>
+    <div class="pair"><button class="say"><span class="e">🎯</span>кон<small>твёрдый Н 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">🐴</span>конь<small>мягкий Н’ ☁️</small></button></div>
+    <div class="pair"><button class="say"><span class="e">🌊</span>мол<small>твёрдый Л 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">🦋</span>моль<small>мягкий Л’ ☁️</small></button></div>
+    <div class="pair"><button class="say"><span class="e">📐</span>угол<small>твёрдый Л 🧱</small></button><button class="say" style="background:var(--pink);color:var(--pinkd)"><span class="e">⚫</span>уголь<small>мягкий Л’ ☁️</small></button></div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Тест «зеркало» 🪞</h3><div class="cells"><div><span class="L">ЛА</span>😐</div><div><span class="L" style="color:var(--pinkd);background:#FDE7F0">ЛЯ</span>😁</div></div><p>Скажи вслух перед зеркалом. На ЛЯ губы сами растягиваются в улыбку: согласный мягкий.</p></div>
+    <div class="card"><h3>Камень и подушка</h3><div class="cells"><div>🪨<span class="L">Т</span></div><div>🛏️<span class="L" style="color:var(--pinkd);background:#FDE7F0">ТЬ</span></div></div><p>Твёрдый звучит жёстко, как стук камня. Мягкий звучит нежно, как будто упал на подушку.</p></div>
+  </div>
+  <h3 style="margin:28px 0 8px;color:var(--french);font-size:28px">Переключатель мягкости</h3>
+  <p class="lead">Согласный сам по себе не решает. Мягкость «включает» следующая буква!</p>
+  <div class="trainer">
+    <div class="btns vb" id="cb"></div>
+    <div class="syl"><span class="ct hard" id="ct"></span><span class="vt" id="vt"></span></div>
+    <div class="msg" id="sm"></div>
+    <div class="vb" id="vb"></div>
+  </div>
+  <div class="hs">
+    <div class="h"><div class="big">А О У Э Ы</div>🧱 делают согласный <b>твёрдым</b></div>
+    <div class="s"><div class="big" style="color:var(--pinkd)">Я Ё Ю Е И Ь</div>☁️ делают согласный <b>мягким</b></div>
+  </div>
+
+  <div class="card"><h3>Гласные-двойники 🧱 → ☁️</h3>
+    <div class="twins"><div class="tw"><span class="h">А</span>→<span class="s">Я</span></div><div class="tw"><span class="h">О</span>→<span class="s">Ё</span></div><div class="tw"><span class="h">У</span>→<span class="s">Ю</span></div><div class="tw"><span class="h">Э</span>→<span class="s">Е</span></div><div class="tw"><span class="h">Ы</span>→<span class="s">И</span></div></div>
+    <p>У каждой «твёрдой» гласной есть «мягкий» двойник. Замени ЛА на ЛЯ, ЛУ на ЛЮ, и согласный смягчится.</p></div>
+  <div class="trainer"><div class="tag">Ь — подушка 🛏️ под согласный</div><div class="big" id="bw"></div><div class="msg" id="bm"></div><div class="btns"><button id="bb"></button></div></div>
+  <h3 style="margin:28px 0 8px;color:var(--french);font-size:28px">Исключения-мемы</h3>
+  <div class="grid">
+    <div class="meme"><div>Ж, Ш, Ц: «после нас пишут И»</div><div class="e">🧱</div><div>а мы <i>всё равно твёрдые</i></div></div>
+    <div class="meme"><div>Ч, Щ: «нам не нужен Ь»</div><div class="e">☁️</div><div>мы <i>всегда мягкие</i></div></div>
+    <div class="meme"><div>Мягкий знак:</div><div class="e">🦸</div><div>сам молчит, а <i>Л смягчил</i></div></div>
+  </div>
+  <div class="note"><b>Всегда твёрдые:</b> Ж, Ш, Ц. <b>Всегда мягкие:</b> Й, Ч, Щ. Ь звука не даёт: «моль» — 3 буквы, но 3 звука [м о л’].</div>
+  <div class="card"><h3>Пишем И, слышим Ы 🤯</h3>
+    <div class="cells"><div><span class="L">жИр</span></div><div>🗣️</div><div><span class="L">жЫр</span>🧱</div></div>
+    <p>После Ж, Ш, Ц согласный остаётся твёрдым, поэтому И читается как Ы: шило [шыла], цирк [цырк].</p></div>
+  <div class="card flow"><h3>Схема: твёрдый или мягкий? 🔍</h3>
+    <div class="box">Нашёл согласный</div><div class="dn">⬇️</div><div class="box">Смотрю на следующую букву</div><div class="dn">⬇️</div>
+    <div class="two"><div class="s">Я Ё Ю Е И Ь<br>☁️ мягкий</div><div class="h">А О У Э Ы<br>🧱 твёрдый</div></div>
+    <div class="dn">⬇️</div><div class="box">⚠️ Ж Ш Ц всегда 🧱, Й Ч Щ всегда ☁️</div></div>
+  <div class="trainer" id="q2"></div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Игры и разбор слова</h2>
+  <div class="card"><h3>Разбираем вместе: ГРИБ</h3>
+    <span class="chip"><b>[г]</b> согласный, звонкий (парный), твёрдый</span>
+    <span class="chip"><b>[р’]</b> согласный, звонкий (непарный), мягкий — после него И</span>
+    <span class="chip"><b>[и]</b> гласный</span>
+    <span class="chip"><b>[п]</b> согласный, глухой (парный), твёрдый — на конце слова «засыпает» (грибы!)</span>
+    <p>4 буквы, 4 звука.</p>
+  </div>
+  <details><summary>Разберите сами: ДУБ, ЛЮК, ЩИ (ответы)</summary>
+    <p><b>ДУБ:</b> [д] звонкий парный твёрдый; [у]; [п] глухой парный твёрдый (дубы).<br>
+    <b>ЛЮК:</b> [л’] звонкий непарный мягкий; [у]; [к] глухой парный твёрдый.<br>
+    <b>ЩИ:</b> [щ’] глухой непарный мягкий; [и]. Два звука, хотя букв тоже два.</p>
+  </details>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Итоговая викторина</h2>
+  <div class="trainer" id="q3"></div>
+  <div class="card"><h3>Шпаргалка</h3>
+    <ul class="clean">
+      <li><b>Звонкий</b> — горло дрожит 🔔, <b>глухой</b> — шёпот 🔕.</li>
+      <li>На конце слова и перед глухим звонкий «засыпает» 😴. Проверяй: зуб → зубы.</li>
+      <li>Я Ё Ю Е И Ь → <b>мягкий</b> ☁️. А О У Э Ы → <b>твёрдый</b> 🧱.</li>
+      <li>Ж Ш Ц всегда твёрдые, Й Ч Щ всегда мягкие.</li>
+    </ul>
+  </div>
+  <div class="card check"><h3>Самопроверка</h3>
+    <label><input type="checkbox"> Могу объяснить, чем звонкий отличается от глухого</label>
+    <label><input type="checkbox"> Назову 3 пары по звонкости-глухости</label>
+    <label><input type="checkbox"> Знаю, как проверить согласный на конце слова</label>
+    <label><input type="checkbox"> Знаю, какие буквы смягчают согласный</label>
+    <label><input type="checkbox"> Помню, какие согласные всегда твёрдые, а какие мягкие</label>
+  </div>
+</section>
+<footer>Звонкие и глухие, твёрдые и мягкие согласные · урок 60 минут</footer>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const E={bell:'🔔',bellx:'🔕',brick:'🧱',cloud:'☁️',zz:'💤'};const ic=n=>E[n];
+/* throat */
+function th(on){$('#th').classList.toggle('on',on);$('#tm').className='msg '+(on?'ok':'bad');
+$('#tm').textContent=on?'Горло дрожит! Б — звонкий 🔔':'Тихо, только воздух. П — глухой 🔕';
+$('#th .face').textContent=on?'🗣️':'🤫'}
+$('#tb').onclick=()=>th(true);$('#tp').onclick=()=>th(false);
+/* buzz */
+document.querySelectorAll('.say').forEach(b=>b.onclick=()=>{
+ if(b.classList.contains('g')||b.style.background)return;
+ b.classList.remove('buzz');void b.offsetWidth;b.classList.add('buzz')});
+/* sleeping letters */
+const O=[['зуб','зуп','зубы'],['хлеб','хлеп','хлебы'],['мороз','морос','морозы'],['сад','сат','сады'],['нож','нош','ножи']];
+let oi=0,os=0;
+function oR(){const[w,h,c]=O[oi];
+ $('#ob').innerHTML=O.map((x,i)=>`<button class="alt${i==oi?' on':''}" data-i="${i}">${x[0]}</button>`).join('');
+ $('#ob').querySelectorAll('button').forEach(b=>b.onclick=()=>{oi=+b.dataset.i;os=0;oR()});
+ const a=w.slice(0,-1),l=w.slice(-1),hl=h.slice(-1);
+ $('#ow').innerHTML=a+`<span class="lt ${os==1?'sl':''}">${os==1?hl:l}</span>`+(os==1?` <span class="zz">${ic('zz')}</span>`:'');
+ $('#om').textContent=os==0?'Пишем: '+w:os==1?'Слышим: ['+h+'] — буква заснула':'Проверка: '+c+' → слышим ['+l+'], значит пишем «'+l+'»';
+ $('#om').className='msg '+(os==1?'bad':'ok')}
+$('#on').onclick=()=>{os=(os+1)%3;oR()};oR();
+/* switch */
+const C=['Л','Н','Т','Д','Р','М'],V=['А','О','У','Э','Ы','Я','Ё','Ю','Е','И','Ь'];let sc=0,sv=0;
+function sR(){const v=V[sv],soft='ЯЁЮЕИЬ'.includes(v);
+ $('#cb').innerHTML=C.map((x,i)=>`<button class="alt${i==sc?' on':''}" data-i="${i}">${x}</button>`).join('');
+ $('#cb').querySelectorAll('button').forEach(b=>b.onclick=()=>{sc=+b.dataset.i;sR()});
+ $('#ct').textContent=C[sc];$('#ct').className='ct '+(soft?'soft':'hard');$('#vt').textContent=v=='Ь'?'Ь':v;
+ $('#sm').innerHTML=soft?`[${C[sc].toLowerCase()}’] — мягкий ☁️`:`[${C[sc].toLowerCase()}] — твёрдый 🧱`;
+ $('#sm').className='msg '+(soft?'bad':'ok');
+ $('#vb').innerHTML=V.map((x,i)=>`<button class="${'ЯЁЮЕИЬ'.includes(x)?'s':'h'}${i==sv?' on':''}" data-i="${i}">${x}</button>`).join('');
+ $('#vb').querySelectorAll('button').forEach(b=>b.onclick=()=>{sv=+b.dataset.i;sR()})}
+sR();
+const B=[['кон','конь'],['мол','моль'],['угол','уголь'],['брат','брать']];let bi=0,bs=0;
+function bR(){const[a,b]=B[bi];$('#bw').innerHTML=bs?b.slice(0,-1)+'<span class="lt sf">ь</span>':a;
+$('#bm').textContent=bs?'Ь молчит, но «'+b.slice(-2,-1)+'» стал мягким ☁️':'Последний согласный твёрдый 🧱';
+$('#bb').textContent=bs?'Убрать подушку ↩':'Положить подушку 🛏️'}
+$('#bb').onclick=()=>{bs=bs?0:1;if(!bs)bi=(bi+1)%B.length;bR()};bR();
+/* quiz engine */
+function quiz(id,items){let i=0,s=0,miss=false;const el=$('#'+id);
+ function r(){
+  if(i>=items.length){el.innerHTML=`<div class="tag">Результат</div><div class="big">${s} из ${items.length}</div><div class="msg ok">${s>=items.length-1?'Отлично!':'Хорошо! Повтори шпаргалку'}</div><div class="btns"><button>Ещё раз</button></div>`;
+   el.querySelector('button').onclick=()=>{i=0;s=0;r()};return}
+  const[q,o,a,h]=items[i];miss=false;
+  el.innerHTML=`<div class="tag">Вопрос ${i+1} из ${items.length}</div><div class="q">${q}</div><div class="btns">${o.map((x,k)=>`<button class="alt" data-k="${k}">${x}</button>`).join('')}</div><div class="msg"></div>`;
+  const m=el.querySelector('.msg');
+  el.querySelectorAll('.btns button').forEach(b=>b.onclick=()=>{
+   if(+b.dataset.k===a){if(!miss)s++;m.className='msg ok';m.textContent='Верно!';
+    el.querySelectorAll('.btns button').forEach(x=>x.disabled=true);setTimeout(()=>{i++;r()},1000)}
+   else{miss=true;b.disabled=true;m.className='msg bad';m.textContent='Не совсем. '+h}})}
+ r()}
+quiz('q1',[
+ ['ду<b>_</b>',['Б','П'],0,'Проверь: дубы.'],['гри<b>_</b>',['Б','П'],0,'Проверь: грибы.'],
+ ['моро<b>_</b>',['З','С'],0,'Проверь: морозы.'],['ло<b>_</b>ка',['Д','Т'],0,'Проверь: лодочка.'],
+ ['ска<b>_</b>ка',['З','С'],0,'Проверь: сказочный.'],['но<b>_</b>',['Ж','Ш'],0,'Проверь: ножи.']]);
+const T=['твёрдый 🧱','мягкий ☁️'];
+quiz('q2',[
+ ['Л в слове <b>ЛУК</b>',T,0,'После У согласный твёрдый.'],['Л в слове <b>ЛЮК</b>',T,1,'Ю смягчает.'],
+ ['Ш в слове <b>ШИНА</b>',T,0,'Ш всегда твёрдый.'],['Ч в слове <b>ЧАЙ</b>',T,1,'Ч всегда мягкий.'],
+ ['Н в слове <b>КОНЬ</b>',T,1,'Мягкий знак смягчает.'],['Ц в слове <b>ЦИРК</b>',T,0,'Ц всегда твёрдый.'],
+ ['Т в слове <b>ТИГР</b>',T,1,'И смягчает.'],['Д в слове <b>ДЫМ</b>',T,0,'Ы — буква твёрдости.']]);
+quiz('q3',[
+ ['Б в слове <b>ДУБ</b> звучит как…',['Б','П'],1,'На конце слова звонкий засыпает.'],
+ ['Какой согласный всегда мягкий?',['Ж','Ч','Ц'],1,'Ж и Ц всегда твёрдые.'],
+ ['Какой согласный всегда твёрдый?',['Щ','Ш','Й'],1,'Щ и Й всегда мягкие.'],
+ ['Звонкий непарный:',['Л','Х','Ц'],0,'Х и Ц глухие.'],
+ ['Сколько мягких согласных в слове <b>КОНЬ</b>?',['0','1','2'],1,'К твёрдый, Н мягкий.'],
+ ['Что делает Ь в слове <b>МОЛЬ</b>?',['Смягчает Л','Даёт звук'],0,'Ь звука не даёт.'],
+ ['Какой согласный глухой парный?',['Т','Л','Н'],0,'Пара: д–т.']]);
+</script>
+</body>
+</html>
